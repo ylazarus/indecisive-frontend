@@ -4,6 +4,7 @@ export function loadRecipes() {
     return async (dispatch, getState) => {
         try {
             const { searchBy } = getState().recipeModule
+            console.log('in actions, search by is: ', searchBy);
             const recipes = await recipeService.query(searchBy)
             dispatch({ type: 'SET_RECIPES', recipes })
         } catch (err) {

@@ -1,57 +1,72 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getRandomInt } from '../services/utilService'
-import { loadRecipes } from '../store/actions/recipeActions'
+import React, { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { getRandomInt } from "../services/utilService"
+import { loadRecipes } from "../store/actions/recipeActions"
 
 export const DishResult = (props) => {
+  let [currPosition, setCurrPosition] = useState(0)
+  let [outOfRecipes, setOutOfRecipes] = useState(false)
 
-  const [randPosition, setRandPosition] = useState(null)
-
-  const {recipes} = useSelector(state => state.recipeModule)
+  const { recipes } = useSelector((state) => state.recipeModule)
   const dispatch = useDispatch()
 
-  useEffect(  () => {
+  useEffect(() => {
     dispatch(loadRecipes())
-    const length = recipes.length
-    setRand(length)
-  },[])
-  
-  // useEffect( () =>{
-  //   const length = recipes.length
-  //   setRand(length)
-  // }, [recipes])
- 
+  }, [])
 
-  const setRand = (length) => {
-    const randInt = getRandomInt(0, length)
-    console.log(randInt);
-    setRandPosition(randInt)
+  const onShowMeAnother = () => {
+    const numOfResults = recipes.length
+    if (currPosition === numOfResults - 1) setOutOfRecipes(true)
+    setCurrPosition(++currPosition)
+    console.log(currPosition, "is current position")
   }
 
   const onSearchAgain = () => {
-    props.history.push('/search')
+    props.history.push("/search")
   }
 
   const onAddDish = () => {
-    props.history.push('/add')
+    props.history.push("/add")
   }
-  
+  const onEditDish = () => {
+    props.history.push(`/add/${recipes[currPosition]._id}`)
+  }
 
-if (!recipes || randPosition === null) return <div>Loading</div>
-  return (
+  if (!recipes) return <div>Loading</div>
+  if (outOfRecipes)
+    return (
       <section>
-          <h1>Dish Result</h1>
-          <h3>Name of Dish: {recipes[randPosition].title  || ''}</h3>
-          <p>Type: {recipes[randPosition].type  || ''}</p>
-          <p>Full Meal? {recipes[randPosition].onePot? 'Yes' : 'No'}</p>
-          <p>Kosher Status: {recipes[randPosition].kosherStatus || ''}</p>
-          <p>Difficulty Level: {recipes[randPosition].difficult? 'Challenging':'Easy'}</p>
-          <p>Approximate Cooking Time: {recipes[randPosition].time  || ''}</p>
-          
-
-          <button onClick={onSearchAgain}>Search Again</button>
-          <button onClick={onAddDish}>Add a new dish</button>
-
+        <h3>No more recipes to display!</h3>
+        <p>Start a new search if you still can't decide!</p>
+        <button onClick={onSearchAgain}>Search Again</button>
       </section>
+    )
+  return (
+    <section className="dish-results-page flex column ">
+      <div className="dish-info flex column auto-center">
+        <h1>Dish Result</h1>
+        <h3>Name: {recipes[currPosition].title || ""}</h3>
+        <p>Type: {recipes[currPosition].type || ""}</p>
+        <p>Is it a Full Meal? {recipes[currPosition].one_pot ? "Yes" : "No"}</p>
+        <p>Kosher Status: {recipes[currPosition].kosher_status || ""}</p>
+        <p>
+          Difficulty Level:{" "}
+          {recipes[currPosition].difficult ? "Challenging" : "Easy"}
+        </p>
+        <p>
+          Approx. Cooking Time: {recipes[currPosition].time || ""} minutes
+        </p>
+      </div>
+      <div className="another-option flex column auto-center">
+        <button onClick={onShowMeAnother}>Show me another option</button>
+        <span> (You have {recipes.length - currPosition - 1} tries left)</span>
+      </div>
+      <div className="other-options flex justify-center">
+
+      <button onClick={onSearchAgain}>Search Again</button>
+      <button onClick={onAddDish}>Add a new dish</button>
+      <button onClick={onEditDish}>Edit this dish</button>
+      </div>
+    </section>
   )
 }

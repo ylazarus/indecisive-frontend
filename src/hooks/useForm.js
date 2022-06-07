@@ -15,7 +15,6 @@ export const useForm = (initialState, cb = () => { }) => {
         if (value === "true" || value == "false") {
             value = JSON.parse(value);
         }
-        console.log('value is', value);
         setFields(prevFields => ({ ...prevFields, [field]: value }))
     }
 

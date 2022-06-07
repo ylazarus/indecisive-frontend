@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react"
+import { useDispatch } from "react-redux"
 import { useForm } from "../hooks/useForm"
 import { recipeService } from "../services/recipeService"
+import { removeRecipe } from "../store/actions/recipeActions"
 
 export const AddDish = (props) => {
   const [hasSaved, setHasSaved] = useState(null)
 
   const [dish, handleChange, setDish] = useForm(null)
+
+  const dispatch = useDispatch()
+
 
   useEffect(() => {
     loadDish()
@@ -25,6 +30,12 @@ export const AddDish = (props) => {
     await recipeService.save({ ...dish })
     setHasSaved(true)
   }
+  
+  const onDeleteDish = async () => {
+    const id = props.match.params.id
+    await dispatch(removeRecipe(id))
+    props.history.push('/search')
+  }
 
   const onBack = () => {
     props.history.push("/search")
@@ -41,7 +52,7 @@ export const AddDish = (props) => {
   if (!dish) return <div>Loading...</div>
 
   return (
-  <section>
+  <section className="dish-results-page">
       <h1>Add a new dish!</h1>
       <form onSubmit={onSaveDish}>
         <section>
@@ -89,6 +100,7 @@ export const AddDish = (props) => {
         </section>
         <button>Save Recipe</button>
         </form>
+        {props.match.params.id && <button onClick={onDeleteDish}>Delete Recipe</button>}
   </section>
   )
 }

@@ -16,7 +16,7 @@ function App() {
         <AppHeader />
         <main>
           <Switch>
-            <Route path="/add" component={AddDish}></Route>
+            <Route path="/add/:id?" component={AddDish}></Route>
             <Route path="/result" component={DishResult}></Route>
             <Route path="/search" component={SearchRecipes}></Route>
             <Route path="/about" component={About}></Route>

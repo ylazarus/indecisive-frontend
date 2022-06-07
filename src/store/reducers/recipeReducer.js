@@ -1,6 +1,6 @@
 
 const INITIAL_STATE = {
-    recipes: [],
+    recipes: null,
     searchBy: null
 }
 

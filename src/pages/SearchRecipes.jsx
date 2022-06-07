@@ -4,7 +4,7 @@ import { setSearchBy } from "../store/actions/recipeActions"
 
 export const SearchRecipes = (props) => {
 
-  const [searchBy, handleChange, setSearch] = useForm({kosherStatus: '', type: '',})
+  const [searchBy, handleChange, setSearch] = useForm({kosherStatus: '', type: ''})
 
 
   // const { recipes } = useSelector((state) => state.recipeModule)
@@ -28,21 +28,21 @@ export const SearchRecipes = (props) => {
           <label htmlFor="type">Type</label>
           <select name="type" id="type" onChange={handleChange} value={searchBy.type}>
             <option value="">All Types</option>
-            <option value="main">Main</option>
-            <option value="vegetable side">Vegetable Side</option>
-            <option value="starch side">Starch Side</option>
-            <option value="soup">Soup</option>
-            <option value="salad">Salad</option>
-            <option value="dessert">Dessert</option>
+            <option value="Main">Main</option>
+            <option value="Vegetable Side">Vegetable Side</option>
+            <option value="Starch Side">Starch Side</option>
+            <option value="Soup">Soup</option>
+            <option value="Salad">Salad</option>
+            <option value="Dessert">Dessert</option>
           </select>
         </section>
         <section>
           <label htmlFor="kosherStatus">Kosher Status</label>
           <select name="kosherStatus" id="kosherStatus" onChange={handleChange} value={searchBy.kosherStatus}>
             <option value="">All</option>
-            <option value="meat">Meat</option>
-            <option value="dairy">Dairy</option>
-            <option value="parve">Parve</option>
+            <option value="Meat">Meat</option>
+            <option value="Dairy">Dairy</option>
+            <option value="Parve">Parve</option>
           </select>
         </section>
         {/* <section>
