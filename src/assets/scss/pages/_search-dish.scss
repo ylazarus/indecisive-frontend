@@ -1,0 +1,11 @@
+.search-dish-form{
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    justify-content: space-around;
+    font-size: 20px;
+
+    select{
+        font-size: 14px;
+    }
+}

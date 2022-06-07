@@ -23,6 +23,36 @@
     }
 }
 
+.main-app{
+    background-image: url(../../imgs/food_background.jpg);
+    height: 90vh;
+    padding: 10vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    .card-display{
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        justify-content: space-around;
+        align-items: center;
+        height: 400px;
+        width: 350px;
+        border: 1px solid black;
+        border-radius: 3px;
+        background-color: #d2ebf3e3;
+        padding: .5rem;
+
+        .card-display-content{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+    }
+  }
+
 // GRIDS
 .simple-cards-grid {
     display: grid;

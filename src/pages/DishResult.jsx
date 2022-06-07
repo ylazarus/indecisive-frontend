@@ -32,17 +32,28 @@ export const DishResult = (props) => {
     props.history.push(`/add/${recipes[currPosition]._id}`)
   }
 
-  if (!recipes) return <div>Loading</div>
+  if (!recipes) return <div className="card-display">Loading...</div> 
+    if (!recipes.length) 
+    return (
+    <section className="card-display">
+      <h1>Aw Snap!</h1>
+      <p>Looks like no dishes match your search :(</p>
+      <p>Please modify your search or, better yet, add your own dish!</p>
+      <button className="myButton" onClick={onSearchAgain}>Search Again</button>
+      <button className="myButton" onClick={onAddDish}>Add a new dish</button>
+
+    </section>
+    )
   if (outOfRecipes)
     return (
-      <section>
+      <section className="card-display">
         <h3>No more recipes to display!</h3>
         <p>Start a new search if you still can't decide!</p>
-        <button onClick={onSearchAgain}>Search Again</button>
+        <button className="myButton" onClick={onSearchAgain}>Search Again</button>
       </section>
     )
   return (
-    <section className="dish-results-page flex column ">
+    <section className="card-display">
       <div className="dish-info flex column auto-center">
         <h1>Dish Result</h1>
         <h3>Name: {recipes[currPosition].title || ""}</h3>
@@ -58,14 +69,14 @@ export const DishResult = (props) => {
         </p>
       </div>
       <div className="another-option flex column auto-center">
-        <button onClick={onShowMeAnother}>Show me another option</button>
+        <button className="myButton" onClick={onShowMeAnother}>Show me another option</button>
         <span> (You have {recipes.length - currPosition - 1} tries left)</span>
       </div>
-      <div className="other-options flex justify-center">
+      <div className="other-options flex column justify-center">
 
-      <button onClick={onSearchAgain}>Search Again</button>
-      <button onClick={onAddDish}>Add a new dish</button>
-      <button onClick={onEditDish}>Edit this dish</button>
+      <button className="myButton" onClick={onSearchAgain}>Search Again</button>
+      <button className="myButton" onClick={onAddDish}>Add a new dish</button>
+      <button className="myButton" onClick={onEditDish}>Edit this dish</button>
       </div>
     </section>
   )

@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom"
 
 export function AppHeader() {
   return (
-    <header className="app-header">
-      <nav className="flex space-around">
+    <header className="app-header flex justify-center">
+      <nav className="header-nav flex align-center space-around">
           {/* <h3>App Logo</h3> */}
         <NavLink exact to="/">
           Home

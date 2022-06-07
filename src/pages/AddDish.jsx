@@ -43,24 +43,24 @@ export const AddDish = (props) => {
 
   if (hasSaved)
     return (
-      <section>
+      <section className="card-display">
         <div>Your entry has been saved, thanks!</div>
-        <button onClick={onBack}>Back to Search</button>
-        <button onClick={loadDish}>Add Another Recipe</button>
+        <button className="myButton" onClick={onBack}>Back to Search</button>
+        <button className="myButton" onClick={loadDish}>Add Another Recipe</button>
       </section>
     )
   if (!dish) return <div>Loading...</div>
 
   return (
-  <section className="dish-results-page">
+  <section className="card-display">
       <h1>Add a new dish!</h1>
-      <form onSubmit={onSaveDish}>
+      <form className="new-dish-info flex column align-center" onSubmit={onSaveDish}>
         <section>
-            <label htmlFor="title">Title</label>
+            <label htmlFor="title">Title </label>
             <input onChange={handleChange} value={dish.title} type="text" name="title" id="title" />
         </section>
         <section>
-          <label htmlFor="type">Type</label>
+          <label htmlFor="type">Type </label>
           <select name="type" id="type" onChange={handleChange} value={dish.type}>
             <option disabled value="">Select Type</option>
             <option value="Main">Main</option>
@@ -72,7 +72,7 @@ export const AddDish = (props) => {
           </select>
         </section>
         <section>
-          <label htmlFor="kosherStatus">Kosher Status</label>
+          <label htmlFor="kosherStatus">Kosher Status </label>
           <select name="kosherStatus" id="kosherStatus" onChange={handleChange} value={dish.kosherStatus}>
             <option value="">All</option>
             <option value="Meat">Meat</option>
@@ -81,24 +81,24 @@ export const AddDish = (props) => {
           </select>
         </section>
         <section>
-          <label htmlFor="onePot">Is it a one pot meal?</label>
+          <label htmlFor="onePot">Is it a one dish meal? </label>
           <select name="onePot" id="onePot" onChange={handleChange} value={dish.onePot}>
             <option value="false">No, needs something else</option>
             <option value="true">Yes!</option>
           </select>
         </section>
         <section>
-          <label htmlFor="difficult">Is it easy to make?</label>
+          <label htmlFor="difficult">Is it easy to make? </label>
           <select name="difficult" id="difficult" onChange={handleChange} value={dish.difficult}>
             <option value="false">Easy peasy!</option>
             <option value="true">Kinda hard</option>
           </select>
         </section>
         <section>
-            <label htmlFor="time">How many minutes does it take to make?</label>
+            <label htmlFor="time">How many minutes? </label>
             <input onChange={handleChange} value={dish.time} type="number" name="time" id="time" />
         </section>
-        <button>Save Recipe</button>
+        <button className="myButton">Save Recipe</button>
         </form>
         {props.match.params.id && <button onClick={onDeleteDish}>Delete Recipe</button>}
   </section>

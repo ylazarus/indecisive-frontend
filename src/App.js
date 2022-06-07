@@ -14,7 +14,7 @@ function App() {
     <Router>
       <div className="App">
         <AppHeader />
-        <main>
+        <main className="main-app">
           <Switch>
             <Route path="/add/:id?" component={AddDish}></Route>
             <Route path="/result" component={DishResult}></Route>
