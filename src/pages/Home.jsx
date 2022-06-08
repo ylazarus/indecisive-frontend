@@ -6,7 +6,7 @@ export function Home() {
     <section className='card-display'>
 
     <h1 className='home-title'>Welcome to Indecisive!</h1>
-    <p>If you can't dedide what to make for dinner, this site is for you!</p>
+    <p>If you can't decide what to make for dinner, this site is for you!</p>
     <p>Choose from a couple of options and we will tell you what to cook, it's that simple.</p>
     <br />
     <Link to='/search' className='myButton'>Let's Get Started!</Link>

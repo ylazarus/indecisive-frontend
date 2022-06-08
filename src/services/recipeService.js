@@ -29,10 +29,10 @@ async function remove(id) {
 }
 
 async function save(dish) {
-    const updatedBoard = dish._id
-        ? await httpService.put(`${ENDPOINT}/${dish._id}`, dish)
+    const updatedDish = dish.id
+        ? await httpService.put(`${ENDPOINT}/${dish.id}`, dish)
         : await httpService.post(ENDPOINT, dish)
-    return updatedBoard
+    return updatedDish
 }
 
 

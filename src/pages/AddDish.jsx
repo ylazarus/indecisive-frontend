@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { useForm } from "../hooks/useForm"
 import { recipeService } from "../services/recipeService"
-import { removeRecipe } from "../store/actions/recipeActions"
+import { removeRecipe, addRecipe } from "../store/actions/recipeActions"
 
 export const AddDish = (props) => {
   const [hasSaved, setHasSaved] = useState(null)
@@ -27,8 +27,12 @@ export const AddDish = (props) => {
 
   const onSaveDish = async (ev) => {
     ev.preventDefault()
-    await recipeService.save({ ...dish })
-    setHasSaved(true)
+    try {
+      await dispatch(addRecipe({...dish})) // handles both create and update in store / service
+      setHasSaved(true)
+          } catch (error) {
+      console.log('could not save now, ', error);
+    }
   }
   
   const onDeleteDish = async () => {

@@ -29,7 +29,7 @@ export const DishResult = (props) => {
     props.history.push("/add")
   }
   const onEditDish = () => {
-    props.history.push(`/add/${recipes[currPosition]._id}`)
+    props.history.push(`/add/${recipes[currPosition].id}`)
   }
 
   if (!recipes) return <div className="card-display">Loading...</div> 

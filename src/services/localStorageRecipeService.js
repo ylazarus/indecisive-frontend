@@ -14,11 +14,11 @@ const STORAGE_KEY = 'recipes'
 const ENDPOINT = 'dish'
 
 const gDefaultRecipes = [
-    { _id: 'r1', title: 'schnitzel', type: 'main', onePot: false, tags: ['chicken', 'shabbat'], kosherStatus: 'meat', difficult: false, addedBy: 'admin', addedDate: Date.now(), quick: true, time: 30, link: '' },
-    { _id: 'r2', title: 'veggie stir-fry', type: 'main', onePot: true, tags: ['vegetarian', 'pasta', 'leftovers'], kosherStatus: 'parve', difficult: false, addedBy: 'admin', addedDate: Date.now(), quick: true, time: 30, link: '' },
-    { _id: 'r3', title: 'moroccan tilapia', type: 'main', onePot: false, tags: ['fish', 'shabbat', 'healthy'], kosherStatus: 'parve', difficult: false, addedBy: 'admin', addedDate: Date.now(), quick: true, time: 30, link: '' },
-    { _id: 'r4', title: 'tuna noodle casserole', type: 'main', onePot: true, tags: ['kid-friendly', 'pasta'], kosherStatus: 'dairy', difficult: false, addedBy: 'admin', addedDate: Date.now(), quick: true, time: 30, link: '' },
-    { _id: 'r5', title: 'veggie skewers', type: 'vegetable side', onePot: false, tags: ['kid-friendly', 'healthy', 'light'], kosherStatus: 'parve', difficult: true, addedBy: 'admin', addedDate: Date.now(), quick: false, time: 45, link: '' },
+    { id: 'r1', title: 'schnitzel', type: 'main', onePot: false, tags: ['chicken', 'shabbat'], kosherStatus: 'meat', difficult: false, addedBy: 'admin', addedDate: Date.now(), quick: true, time: 30, link: '' },
+    { id: 'r2', title: 'veggie stir-fry', type: 'main', onePot: true, tags: ['vegetarian', 'pasta', 'leftovers'], kosherStatus: 'parve', difficult: false, addedBy: 'admin', addedDate: Date.now(), quick: true, time: 30, link: '' },
+    { id: 'r3', title: 'moroccan tilapia', type: 'main', onePot: false, tags: ['fish', 'shabbat', 'healthy'], kosherStatus: 'parve', difficult: false, addedBy: 'admin', addedDate: Date.now(), quick: true, time: 30, link: '' },
+    { id: 'r4', title: 'tuna noodle casserole', type: 'main', onePot: true, tags: ['kid-friendly', 'pasta'], kosherStatus: 'dairy', difficult: false, addedBy: 'admin', addedDate: Date.now(), quick: true, time: 30, link: '' },
+    { id: 'r5', title: 'veggie skewers', type: 'vegetable side', onePot: false, tags: ['kid-friendly', 'healthy', 'light'], kosherStatus: 'parve', difficult: true, addedBy: 'admin', addedDate: Date.now(), quick: false, time: 45, link: '' },
  
 ]
 
@@ -37,12 +37,12 @@ function query(filterBy) {
 }
 
 function getById(id) {
-    const recipe = gRecipes.find(recipe => recipe._id === id)
+    const recipe = gRecipes.find(recipe => recipe.id === id)
     return Promise.resolve({ ...recipe })
 }
 
 function remove(id) {
-    const idx = gRecipes.findIndex(recipe => recipe._id === id)
+    const idx = gRecipes.findIndex(recipe => recipe.id === id)
     gRecipes.splice(idx, 1)
     if (!gRecipes.length) gRecipes = gDefaultRecipes.slice()
     storageService.store(STORAGE_KEY, gRecipes)
@@ -50,11 +50,11 @@ function remove(id) {
 }
 
 function save(recipeToSave) {
-    if (recipeToSave._id) {
-        const idx = gRecipes.findIndex(recipe => recipe._id === recipeToSave._id)
+    if (recipeToSave.id) {
+        const idx = gRecipes.findIndex(recipe => recipe.id === recipeToSave.id)
         gRecipes.splice(idx, 1, recipeToSave)
     } else {
-        recipeToSave._id = makeId()
+        recipeToSave.id = makeId()
         recipeToSave.addedDate = Date.now()
         recipeToSave.addedBy = 'Guest'
         gRecipes.push(recipeToSave)

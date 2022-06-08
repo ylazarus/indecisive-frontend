@@ -15,10 +15,12 @@ export function loadRecipes() {
 }
 
 export function addRecipe(recipe) {
+    console.log('in actions, recipe is: ', recipe);
     return async (dispatch) => {
         try {
             await recipeService.save(recipe)
-            dispatch({type: 'ADD_RECIPE', recipe})
+            if (recipe.id) dispatch({type: 'UPDATE_RECIPE', recipe})
+            else dispatch({type: 'ADD_RECIPE', recipe})
         } catch (error) {
             console.log('error:', error);
         }
