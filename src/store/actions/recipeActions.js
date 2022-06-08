@@ -22,7 +22,8 @@ export function addRecipe(recipe) {
             if (recipe.id) dispatch({type: 'UPDATE_RECIPE', recipe})
             else dispatch({type: 'ADD_RECIPE', recipe})
         } catch (error) {
-            console.log('error:', error);
+            throw error
+            // console.log('error:', error);
         }
     }
 }
