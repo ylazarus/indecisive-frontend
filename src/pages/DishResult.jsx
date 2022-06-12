@@ -18,7 +18,6 @@ export const DishResult = (props) => {
     const numOfResults = recipes.length
     if (currPosition === numOfResults - 1) setOutOfRecipes(true)
     setCurrPosition(++currPosition)
-    console.log(currPosition, "is current position")
   }
 
   const onSearchAgain = () => {

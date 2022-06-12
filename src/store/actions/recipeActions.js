@@ -4,7 +4,6 @@ export function loadRecipes() {
     return async (dispatch, getState) => {
         try {
             const { searchBy } = getState().recipeModule
-            console.log('in actions, search by is: ', searchBy);
             const recipes = await recipeService.query(searchBy)
             dispatch({ type: 'SET_RECIPES', recipes })
         } catch (err) {
@@ -15,7 +14,6 @@ export function loadRecipes() {
 }
 
 export function addRecipe(recipe) {
-    console.log('in actions, recipe is: ', recipe);
     return async (dispatch) => {
         try {
             await recipeService.save(recipe)
