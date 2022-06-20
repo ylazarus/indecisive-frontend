@@ -20,10 +20,13 @@ export const AddDish = (props) => {
 
   const loadDish = async () => {
     setHasSaved(false)
-    const dish = id
-      ? await recipeService.getById(id)
-      : recipeService.getEmptyRecipe()
-      console.log(dish);
+    let dish
+    if (id) {
+      const dishes = await recipeService.getById(id)
+      dish = dishes[0]
+    }
+    else dish = recipeService.getEmptyRecipe()
+    console.log(dish);
     setDish(dish)
   }
 
