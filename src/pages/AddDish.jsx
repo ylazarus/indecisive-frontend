@@ -6,7 +6,7 @@ import { removeRecipe, addRecipe } from "../store/actions/recipeActions"
 
 export const AddDish = (props) => {
   const [hasSaved, setHasSaved] = useState(null)
-  const [alreadyInDB, setAlreadyInDB] = useState(null)
+  const [alreadyInDB, setAlreadyInDB] = useState(false)
 
   const [dish, handleChange, setDish] = useForm(null)
 
@@ -16,9 +16,10 @@ export const AddDish = (props) => {
     loadDish()
   }, [])
 
+  const id = props.match.params.id
+
   const loadDish = async () => {
     setHasSaved(false)
-    const id = props.match.params.id
     const dish = id
       ? await recipeService.getById(id)
       : recipeService.getEmptyRecipe()
@@ -29,15 +30,16 @@ export const AddDish = (props) => {
     ev.preventDefault()
     try {
       await dispatch(addRecipe({ ...dish })) // handles both create and update in store / service
+      
       setHasSaved(true)
     } catch (error) {
+      console.log('failed to add dish');
       setHasSaved(true)
       setAlreadyInDB(true)
     }
   }
 
   const onDeleteDish = async () => {
-    const id = props.match.params.id
     await dispatch(removeRecipe(id))
     props.history.push("/search")
   }
@@ -51,8 +53,8 @@ export const AddDish = (props) => {
       <section className="card-display">
         <div>
           {alreadyInDB
-            ? "Your dish was not saved, probably because that dish is already in the database! Please try adding another dish"
-            : "Your entry has been saved, thanks!"}
+            ? <p>"Your dish was not saved, probably because that dish is already in the database! Please try adding another dish"</p>
+            : <p>"Your entry has been saved, thanks!"</p>}
         </div>
         <button className="myButton" onClick={onBack}>
           Back to Search
@@ -66,7 +68,7 @@ export const AddDish = (props) => {
 
   return (
     <section className="card-display">
-      <h1>Add a new dish!</h1>
+      {id ? <h1>Edit dish!</h1>: <h1>Add a new dish!</h1>}
       <form
         className="new-dish-info flex column align-center"
         onSubmit={onSaveDish}
@@ -150,8 +152,8 @@ export const AddDish = (props) => {
         </section>
         <button className="myButton">Save Recipe</button>
       </form>
-      {props.match.params.id && (
-        <button onClick={onDeleteDish}>Delete Recipe</button>
+      {id && (
+        <button className="myButton" onClick={onDeleteDish}>Delete Recipe</button>
       )}
     </section>
   )

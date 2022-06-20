@@ -1,5 +1,3 @@
-import { storageService } from './storageService.js'
-import { makeId } from './utilService.js'
 import {httpService} from './http.service'
 
 export const recipeService = {
@@ -13,7 +11,6 @@ export const recipeService = {
 const ENDPOINT = 'dish'
 
 async function query(filterBy = {}) {
-    console.log('going to search in db', filterBy); 
     return await httpService.get(ENDPOINT, filterBy)
 
 }
