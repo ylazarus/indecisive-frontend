@@ -12,6 +12,9 @@ export function AppHeader() {
         <NavLink to="/search">
           Search
         </NavLink>
+        <NavLink to="/login">
+          Login
+        </NavLink>
         <NavLink to="/about">
           About
         </NavLink>
