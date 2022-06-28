@@ -2,17 +2,21 @@ import React, { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { useForm } from "../hooks/useForm"
 import { recipeService } from "../services/recipeService"
+import { userService } from "../services/user-service"
 import { removeRecipe, addRecipe } from "../store/actions/recipeActions"
 
 export const AddDish = (props) => {
   const [hasSaved, setHasSaved] = useState(null)
   const [alreadyInDB, setAlreadyInDB] = useState(false)
+  const [currUser, setCurrUser] = useState(null)
 
   const [dish, handleChange, setDish] = useForm(null)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
+    const currUser = userService.getLoggedinUser()
+    setCurrUser(currUser)
     loadDish()
   }, [])
 
@@ -52,6 +56,10 @@ export const AddDish = (props) => {
     props.history.push("/search")
   }
 
+  const onToLogin = () => {
+    props.history.push("/login")
+  }
+
   if (hasSaved)
     return (
       <section className="card-display">
@@ -69,7 +77,13 @@ export const AddDish = (props) => {
       </section>
     )
   if (!dish) return <div>Loading...</div>
-
+  if (id && !currUser) return (
+    <section className="card-display">
+      <h3>You must be logged in to edit</h3>
+      <button onClick={onToLogin} className="myButton">To Login</button>
+    </section>
+  )
+  
   return (
     <section className="card-display">
       {id ? <h1>Edit dish!</h1>: <h1>Add a new dish!</h1>}
@@ -156,7 +170,7 @@ export const AddDish = (props) => {
         </section>
         <button className="myButton">Save Recipe</button>
       </form>
-      {id && (
+      {id && currUser.is_admin && (
         <button className="myButton" onClick={onDeleteDish}>Delete Recipe</button>
       )}
     </section>

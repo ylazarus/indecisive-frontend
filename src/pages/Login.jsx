@@ -13,12 +13,14 @@ export const Login = () => {
   const [loginFailed, setLoginFailed] = useState(false)
 
 
-  const { loggedInUser } = useSelector((state) => state.userModule)
   const dispatch = useDispatch()
 
   useEffect(() => {
     const currUser = userService.getLoggedinUser()
     setCurrUser(currUser)
+  }, [isLoggedIn])
+
+  useEffect(() => {
     setUserInfo({ username: "", password: "", fullname: "" })
   }, [])
 
@@ -61,7 +63,7 @@ export const Login = () => {
   if (currUser || isLoggedIn)
     return (
       <section className="card-display">
-        <h3>You are currently logged in {currUser?.fullname || ""}</h3>
+        <h3>You are logged in as {currUser?.fullname || ""}</h3>
         <button className="myButton" onClick={onLogout}>
           Logout
         </button>
