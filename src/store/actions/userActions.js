@@ -7,14 +7,16 @@ export function login(userCred) {
                 const loggedinUser = await userService.login(userCred)
                 dispatch({ type: 'SET_LOGGED_IN_USER', loggedinUser})
             } catch (error) {
-                console.log('error: ', error);        
+                console.log('from user Actions error: ', error);        
+                throw error        
             }
         } else {
             try {
                 const loggedinUser = await userService.signup(userCred)
                 dispatch({ type: 'SET_LOGGED_IN_USER', loggedinUser})
             } catch (error) {
-                console.log('error: ', error);        
+                console.log('from user Actions error: ', error);        
+                throw error
             }
         }
         
@@ -28,6 +30,7 @@ export function logout() {
             dispatch({type: 'REMOVE_LOGGED_IN_USER'})
         } catch (error) {
             console.log('error: ', error);
+            throw error
         }
     }
 }

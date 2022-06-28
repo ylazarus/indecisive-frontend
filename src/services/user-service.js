@@ -1,6 +1,5 @@
 import { httpService } from './http.service'
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
-var gWatchedUser = null;
 
 export const userService = {
     login,
@@ -19,7 +18,6 @@ async function getUsers() {
 
 async function getById(userId) {
     const user = await httpService.get(`user/${userId}`)
-    gWatchedUser = user;
     return user;
 }
 function remove(userId) {
