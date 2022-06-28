@@ -30,7 +30,6 @@ export const AddDish = (props) => {
       dish = dishes[0]
     }
     else dish = recipeService.getEmptyRecipe()
-    console.log(dish);
     setDish(dish)
   }
 
@@ -77,9 +76,9 @@ export const AddDish = (props) => {
       </section>
     )
   if (!dish) return <div>Loading...</div>
-  if (id && !currUser) return (
+  if (!currUser) return (
     <section className="card-display">
-      <h3>You must be logged in to edit</h3>
+      <h3>You must be logged in to {(id) ? 'edit' : 'add a dish'}</h3>
       <button onClick={onToLogin} className="myButton">To Login</button>
     </section>
   )
