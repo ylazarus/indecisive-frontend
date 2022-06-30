@@ -50,6 +50,10 @@ export const Login = () => {
     setIsSignup(true)
   }
 
+  const onDoSignin = () => {
+    setIsSignup(false)
+  }
+
   if (!userInfo) return <div className="card-display">Loading...</div>
   if (loginFailed)
     return (
@@ -107,6 +111,7 @@ export const Login = () => {
         )}
         <button className="myButton">{isSignup ? "Sign Up!" : "Login"}</button>
       </form>
+        {isSignup && <button className="myButton" onClick={onDoSignin}>Back to Login</button>}
       {!isSignup && (
         <section className="flex column align-center">
         <p>No account yet?</p>
