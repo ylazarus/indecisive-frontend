@@ -23,10 +23,10 @@ export const SearchRecipes = (props) => {
 
   return (
     <section className="card-display full-grow">
-      <h1>What should I make?!</h1>
+      <h1 className="bold">What should I make?!</h1>
       <form className="search-dish-form" onSubmit={onSearch}>
         <section>
-          <label htmlFor="type">Type </label>
+          <label htmlFor="type" className="bold">Type </label>
           <select name="type" id="type" onChange={handleChange} value={searchBy.type}>
             <option value="">All Types</option>
             <option value="Main">Main</option>
@@ -38,7 +38,7 @@ export const SearchRecipes = (props) => {
           </select>
         </section>
         <section>
-          <label htmlFor="kosherStatus">Kosher Status </label>
+          <label htmlFor="kosherStatus" className="bold">Kosher Status </label>
           <select name="kosherStatus" id="kosherStatus" onChange={handleChange} value={searchBy.kosherStatus}>
             <option value="">All</option>
             <option value="Meat">Meat</option>

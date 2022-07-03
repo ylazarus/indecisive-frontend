@@ -96,11 +96,11 @@ export const AddDish = (props) => {
     <section className="card-display">
       {id ? <h1>Edit dish!</h1> : <h1>Add a new dish!</h1>}
       <form
-        className="new-dish-info flex column align-center"
+        className="new-dish-info flex column p5"
         onSubmit={onSaveDish}
       >
         <section>
-          <label htmlFor="title">Title </label>
+          <label htmlFor="title" className="bold">Title </label>
           <input
             onChange={handleChange}
             value={dish.title}
@@ -110,7 +110,7 @@ export const AddDish = (props) => {
           />
         </section>
         <section>
-          <label htmlFor="type">Type </label>
+          <label htmlFor="type" className="bold">Type </label>
           <select
             name="type"
             id="type"
@@ -129,7 +129,7 @@ export const AddDish = (props) => {
           </select>
         </section>
         <section>
-          <label htmlFor="kosherStatus">Kosher Status </label>
+          <label htmlFor="kosherStatus" className="bold">Kosher Status </label>
           <select
             name="kosherStatus"
             id="kosherStatus"
@@ -143,7 +143,7 @@ export const AddDish = (props) => {
           </select>
         </section>
         <section>
-          <label htmlFor="onePot">Is it a one dish meal? </label>
+          <label htmlFor="onePot" className="bold">One dish meal? </label>
           <select
             name="onePot"
             id="onePot"
@@ -155,7 +155,7 @@ export const AddDish = (props) => {
           </select>
         </section>
         <section>
-          <label htmlFor="difficult">Is it easy to make? </label>
+          <label htmlFor="difficult" className="bold">Is it easy to make? </label>
           <select
             name="difficult"
             id="difficult"
@@ -167,7 +167,7 @@ export const AddDish = (props) => {
           </select>
         </section>
         <section>
-          <label htmlFor="time">How many minutes? </label>
+          <label htmlFor="time" className="bold">Num of minutes? </label>
           <input
             onChange={handleChange}
             value={dish.time}
@@ -176,10 +176,10 @@ export const AddDish = (props) => {
             id="time"
           />
         </section>
-        <button className="myButton">Save Recipe</button>
+        <button className="myButton m20">Save Recipe</button>
       </form>
       {id && currUser.is_admin && (
-        <button className="myButton" onClick={onDeleteDish}>
+        <button className="myButton m20" onClick={onDeleteDish}>
           Delete Recipe
         </button>
       )}

@@ -78,7 +78,7 @@ export const Login = () => {
       <h1>{isSignup ? "Sign Up!" : "Sign In"}</h1>
       <form className="login-form flex column space-between align-center" onSubmit={onLogin}>
         <section>
-          <label htmlFor="username">Username </label>
+          <label htmlFor="username" className="bold">Username </label>
           <input
             onChange={handleChange}
             value={userInfo.username}
@@ -88,7 +88,7 @@ export const Login = () => {
           />
         </section>
         <section>
-          <label htmlFor="password">Password </label>
+          <label htmlFor="password" className="bold">Password </label>
           <input
             onChange={handleChange}
             value={userInfo.password}
@@ -99,7 +99,7 @@ export const Login = () => {
         </section>
         {isSignup && (
           <section>
-            <label htmlFor="fullname">Full Name </label>
+            <label htmlFor="fullname" className="bold">Full Name </label>
             <input
               onChange={handleChange}
               value={userInfo.fullname}
@@ -109,7 +109,7 @@ export const Login = () => {
             />
           </section>
         )}
-        <button className="myButton">{isSignup ? "Sign Up!" : "Login"}</button>
+        <button className="myButton m20">{isSignup ? "Sign Up!" : "Login"}</button>
       </form>
         {isSignup && <button className="myButton" onClick={onDoSignin}>Back to Login</button>}
       {!isSignup && (

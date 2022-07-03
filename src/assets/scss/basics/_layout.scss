@@ -22,9 +22,11 @@
         max-width: $normal-breakpoint;
     }
 }
+.App{
+    background-image: url(../../imgs/food_background.jpg);
 
 .main-app{
-    background-image: url(../../imgs/food_background.jpg);
+    
     height: 90vh;
     padding-top: 10vh;
     background-repeat: no-repeat;
@@ -49,9 +51,14 @@
             justify-content: center;
             align-items: center;
         }
+
+        &.home-about-page{
+            padding: 1.5rem;
+        }
         
     }
   }
+}
 
 // GRIDS
 .simple-cards-grid {
